@@ -1,9 +1,10 @@
 "use client"
 import { useEffect, useState } from 'react';
 import Layout from './component/Layout';
-import FilterModal from './component/FilterModal';
 import Table from './component/Table';
 import axios from 'axios';
+import SummaryBoxes from './component/SummaryBoxes';
+import FilterModal from './component/FilterModal';
 
 
 
@@ -49,7 +50,7 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filters, setFilters] = useState({});
   const [data, setData] = useState([]);
-
+   const [waitlistData,setWaitlistData]=useState([])
   // const applyFilter = (filterValues) => {
   //   const filteredData = filterData(initialData, filterValues);
   //   setData(filteredData);
@@ -61,6 +62,7 @@ export default function Home() {
       try {
         const res = await axios.get(`https://backend-data-theta.vercel.app/data`);
         setData(res.data);
+        setWaitlistData(res.data)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -71,18 +73,22 @@ export default function Home() {
     <Layout>
       <div className="mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Waitlist</h1>
-        <button
+        {/* <button
           onClick={() => setIsModalOpen(true)}
           className="px-4 py-2 bg-blue-500 text-white rounded-md"
         >
           Filter
-        </button>
+        </button> */}
       </div>
-      {/* <FilterModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        applyFilter={applyFilter}
-      /> */}
+      {/* <SummaryBoxes/> */}
+      <FilterModal
+         data={data}
+         setData={setData}
+         waitlistData={waitlistData}
+        // isOpen={isModalOpen}
+        // onClose={() => setIsModalOpen(false)}
+        // applyFilter={applyFilter}
+      />
       <div className="h-[70%]">
         <Table data={data} />
       </div>
