@@ -1,12 +1,11 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from './component/Layout';
 import FilterModal from './component/FilterModal';
+import Table from './component/Table';
+import axios from 'axios';
 
-const initialData = [
-  { createdOn: '2023-05-01', payer: 'John Doe', status: 'Pending', email: 'john@example.com', phone: '123-456-7890', services: 'Service A', scheduled: '2023-06-01' },
-  { createdOn: '2023-05-02', payer: 'Jane Smith', status: 'Confirmed', email: 'jane@example.com', phone: '987-654-3210', services: 'Service B', scheduled: '2023-06-02' },
-];
+
 
 const filterData = (data, filters) => {
   return data.filter(item => {
@@ -49,51 +48,44 @@ const filterData = (data, filters) => {
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filters, setFilters] = useState({});
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState([]);
 
-  const applyFilter = (filterValues) => {
-    const filteredData = filterData(initialData, filterValues);
-    setData(filteredData);
-    setFilters(filterValues);
-  };
+  // const applyFilter = (filterValues) => {
+  //   const filteredData = filterData(initialData, filterValues);
+  //   setData(filteredData);
+  //   setFilters(filterValues);
+  // };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`https://backend-data-theta.vercel.app/data`);
+        setData(res.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <Layout>
       <div className="mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Waitlist</h1>
-        <button onClick={() => setIsModalOpen(true)} className="px-4 py-2 bg-blue-500 text-white rounded-md">Filter</button>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="px-4 py-2 bg-blue-500 text-white rounded-md"
+        >
+          Filter
+        </button>
       </div>
-      <table className="min-w-full bg-white">
-        <thead>
-          <tr>
-            <th className="py-2">Created On</th>
-            <th className="py-2">Payer</th>
-            <th className="py-2">Status</th>
-            <th className="py-2">Email</th>
-            <th className="py-2">Phone</th>
-            <th className="py-2">Services</th>
-            <th className="py-2">Scheduled</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, index) => (
-            <tr key={index} className="text-center">
-              <td className="py-2">{row.createdOn}</td>
-              <td className="py-2">{row.payer}</td>
-              <td className="py-2">{row.status}</td>
-              <td className="py-2">{row.email}</td>
-              <td className="py-2">{row.phone}</td>
-              <td className="py-2">{row.services}</td>
-              <td className="py-2">{row.scheduled}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <FilterModal
+      {/* <FilterModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         applyFilter={applyFilter}
-      />
+      /> */}
+      <div className="h-[70%]">
+        <Table data={data} />
+      </div>
     </Layout>
   );
 }
