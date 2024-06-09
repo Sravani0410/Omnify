@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 
 export default function Sidebar({ slideropen, setSliderOpen }) {
   const [date,setDate]=useState({})
+  // const setSliderOpens=setSliderOpen.toString()
   useEffect(() => {
     function getCurrentDateTime() {
       const now = new Date();
