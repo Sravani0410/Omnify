@@ -8,8 +8,6 @@ import SummaryBoxes from './component/SummaryBoxes';
 import FilterModal from './component/FilterModal';
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filters, setFilters] = useState({});
   const [data, setData] = useState([]);
    const [waitlistData,setWaitlistData]=useState([])
   useEffect(() => {
@@ -28,12 +26,6 @@ export default function Home() {
     <Layout>
       <div className="mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Waitlist</h1>
-        {/* <button
-          onClick={() => setIsModalOpen(true)}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md"
-        >
-          Filter
-        </button> */}
       </div>
       <SummaryBoxes data={data}/>
       <div className='flex flex-row justify-between'>

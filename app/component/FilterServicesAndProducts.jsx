@@ -111,7 +111,7 @@ const handleServiceType=(e,type)=>{
           {searchResult.length > 0 && (
             <div>
               <h4>
-                Showing {searchResult.length} results matching &quot; {serviceName} &quot;:
+                Showing {searchResult.length} results matching  &quot;{serviceName}&quot;:
               </h4>
               {searchResult.map((el) => (
                 <div className="flex flex-row justify-between m-0.5" key={el.id}>
@@ -174,9 +174,9 @@ const handleServiceType=(e,type)=>{
             </select>
              {filteredTagsResult>0&&(
                 <div>
-                    <h4>Showing {filteredTagsResult.length} results matching "type={searchbytag.type} and status ={searchbytag.status}":</h4>
+                    <h4>Showing {filteredTagsResult.length} results matching &quot;type={searchbytag.type} and status ={searchbytag.status}&quot;:</h4>
                     {filteredTagsResult.map((el)=>(
-                        <div className="flex flex-row justify-between m-0.5">
+                        <div key={el.id} className="flex flex-row justify-between m-0.5">
                             <label>
                                 <input type="checkout"/>
                                 {el.name}
