@@ -35,7 +35,7 @@ export default function Home() {
           Filter
         </button> */}
       </div>
-      <SummaryBoxes/>
+      <SummaryBoxes data={data}/>
       <div className='flex flex-row justify-between'>
       <FilterModal
          data={data}

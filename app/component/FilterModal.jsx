@@ -186,7 +186,7 @@ console.log("filteredServices",filteredServices)
           Filter
         </button>
         {isopen && (
-          <div className="fixed inset-0 bg-opacity-30 bg-gray-900  flex justify-center items-center">
+          <div className="fixed inset-0 bg-opacity-20 bg-gray-900  flex justify-center items-center">
             <div className="w-3/4 p-6 bg-white rounded-lg shadow-lg max-w-4xl">
               <div className="flex">
                 <div className="w-1/4 pr-4 border-r">
@@ -336,13 +336,13 @@ console.log("filteredServices",filteredServices)
               </div>
               <div className="flex justify-end mt-4">
                 <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded mr-2"
+                  className="px-4 py-2 bg-slate-100 text-black rounded mr-2"
                   onClick={resetDefaultFilter}
                 >
                   Reset to Default
                 </button>
                 <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded"
+                  className="px-4 py-2 bg-black text-white rounded"
                   onClick={applyDataFilter}
                 >
                   Apply
