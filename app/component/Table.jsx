@@ -6,10 +6,10 @@ import { LuHash } from "react-icons/lu";
 
 const Table = ({ data,selectedColumns }) => {
   return (
-    <div className="overflow-scroll px-0 scroll-smooth">
-      <table className="mt-4 w-full min-w-max table-auto text-left">
+    <div className="px-0 scroll-smooth overflow-y-auto">
+      <table className="mt-4 w-full min-w-max table-auto text-left overflow-y">
         <thead>
-          <tr>
+          <tr className="bg-gray-100 border-b">
           {selectedColumns.includes('created_on') && (
               <th className="border-y p-4">
                 <p className="antialiased ml-2 font-sans text-sm text-gray-600 flex items-center gap-2 font-normal">

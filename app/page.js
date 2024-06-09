@@ -46,7 +46,9 @@ export default function Home() {
           waitlistData={waitlistData}
         />
         <div className="flex flex-row justify-between">
-          <button onClick={() => setEditShowModal(true)}>
+          <button
+          className="p-2 rounded bg-gray-100 hover:bg-gray-200" 
+          onClick={() => setEditShowModal(true)}>
             <FiColumns />
           </button>
         </div>
@@ -58,7 +60,7 @@ export default function Home() {
           />
         )}
       </div>
-      <div className="h-[70%]">
+      <div className="h-[70%] mt-4">
         <Table data={data} selectedColumns={selectedColumns} />
       </div>
     </Layout>

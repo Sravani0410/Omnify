@@ -11,22 +11,29 @@ const EditColumnModal = ({ selectedColumns, setSelectedColumns, onClose }) => {
   };
 
   return (
-    <div className="modal">
-      <h3>Edit Columns</h3>
-      <div className="checkboxes">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-white rounded-lg p-6 shadow-lg w-96">
+      <h3 className="text-xl font-semibold mb-4">Edit Columns</h3>
+      <div className="space-y-2">
         {['created_on', 'payer', 'status', 'email', 'payer_phone', 'services', 'scheduled'].map((column) => (
-          <label key={column}>
+          <label key={column} className="flex items-center space-x-3">
             <input
               type="checkbox"
               checked={selectedColumns.includes(column)}
               onChange={() => handleColumnChange(column)}
+              className="form-checkbox h-4 w-4 text-black"
             />
-            {column.replace('_', ' ')}
+            <span className="text-gray-700">{column.replace('_', ' ')}</span>
           </label>
         ))}
       </div>
-      <button onClick={onClose}>Apply</button>
+      <div className="mt-6 flex justify-end space-x-2">
+        <button onClick={onClose} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          Apply
+        </button>
+      </div>
     </div>
+  </div>
   );
 };
 
