@@ -8,9 +8,11 @@ import {
   FaQuestionCircle,
   FaCalendarAlt,
 } from "react-icons/fa";
+import { AiOutlineGlobal } from "react-icons/ai";
 import { BiLoaderCircle } from "react-icons/bi";
 import { LuPanelRightClose } from "react-icons/lu";
 import { useEffect, useState } from "react";
+import { BsArrowLeftRight } from "react-icons/bs";
 
 export default function Sidebar({ slideropen, setSliderOpen }) {
   const [date,setDate]=useState({})
@@ -57,14 +59,15 @@ export default function Sidebar({ slideropen, setSliderOpen }) {
   
   
   return (
-    <div className={`transition-all ${
+    <div className={`bg-gray-100 h-full hidden p-5 border-3px border-black rounded-lg lg:block md:block lg:h-screen md:h-screen 
+      transition-all ${
       slideropen ? "w-1/5" : "w-[8%]"
-    } bg-gray-100 h-full hidden p-5 border-3px border-black rounded-lg lg:block md:block lg:h-screen md:h-screen`}>
+    } `}>
      {
      slideropen? (
-     <div className="h-full bg-white shadow-md">
+     <div className="h-full flex flex-col bg-white shadow-md">
         <div className="p-4 border-b flex flex-row justify-between">
-        <BiLoaderCircle size={30}/>
+          <BiLoaderCircle size={30}/>
           <h3 className="text-xl font-bold">Front-Desk</h3>
           <button className="p-2 flex" onClick={()=>setSliderOpen(!slideropen)}>
             <LuPanelRightClose />
@@ -72,8 +75,17 @@ export default function Sidebar({ slideropen, setSliderOpen }) {
         </div>
         <div className="p-4">
           <div className="mb-5 p-2 flex flex-row justify-between border-b shadow-md">
+           <h2 className="text-sm font-bold">Location name</h2> <BsArrowLeftRight />
+          </div>
+          <div className="mb-5 p-2 border-b shadow-md bg-gray-100">
+            <div className="flex flex-row justify-between ">
             <h2 className="text-sm font-bold">{date.formattedTime}</h2>
-             <p>{date.currentDayName} {date.currentDay} {date.currentMonthName} </p>
+            <p>{date.currentDayName} {date.currentDay} {date.currentMonthName} </p>
+            </div>
+            <div className="flex mr-2 flex-row items-center">
+              <AiOutlineGlobal className="mr-2"/> 
+              <p>UTC +5hours</p>
+            </div>
           </div>
           <nav>
             <ul>
@@ -93,19 +105,19 @@ export default function Sidebar({ slideropen, setSliderOpen }) {
           </nav>
         </div>
         <div className="mt-auto p-4 border-t">
-          <div className="mb-4">
+          <div className="mb-2 flex items-center">
             <FaTachometerAlt className="mr-2" /> Dashboard
           </div>
-          <div className="mb-4">
+          <div className="mb-2 flex items-center">
             <FaUserShield className="mr-2" /> Admin Name
           </div>
-          <div>
+          <div className="mb-2 flex items-center">
             <FaQuestionCircle className="mr-2" /> Help Center
           </div>
         </div>
       </div>
       ):(
-        <div className="h-full bg-white shadow-md">
+        <div className="h-full flex flex-col bg-white shadow-md">
         <div className="p-6 border-b flex flex-row justify-between">
           <button className="p-2 flex" onClick={()=>setSliderOpen(!slideropen)}>
            <BiLoaderCircle size={30}/>
@@ -114,6 +126,9 @@ export default function Sidebar({ slideropen, setSliderOpen }) {
         <div className="p-4">
           <nav>
             <ul>
+              <li className="mb-2 flex justify-center items-center gap-20">
+              <AiOutlineGlobal />
+              </li>
               <li className="mb-2 flex  justify-center items-center gap-20">
                 <FaRegCalendarAlt  /> 
               </li>

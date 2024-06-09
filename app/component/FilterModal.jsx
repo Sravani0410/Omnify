@@ -180,8 +180,8 @@ export default function FilterModal({ data, setData, waitlistData }) {
 // console.log("filteredServices",filteredServices)
   return (
     <>
-      <div className="px-3 h-[1.5%]">
-        <button className="p-4 flex" onClick={() => setIsOpen(!isopen)}>
+      <div className="px-2 mt-2 h-[1.5%] shadow-md bg-gray-200 rounded-md">
+        <button className="p-2 flex" onClick={() => setIsOpen(!isopen)}>
           <LuFilter className="mr-2"/>
           Filter
         </button>
