@@ -40,30 +40,28 @@ const FilterServicesAndProducts = ({ onFilter }) => {
     onFilter(searchResult);
   }, [searchResult, onFilter]);
 
-  useEffect(()=>{
-    if(filterbycategory=="name"){
-        if(serviceName.length>0){
-            const result=servicedata
-            .filter((e)=>e.name.toLowerCase().startsWith(serviceName))
-            .slice(0,10);
-            setSearchResult(result);
-        }
-        else{
-            setSearchResult([])
-        }
+  useEffect(() => {
+    if (filterbycategory === "name") {
+      if (serviceName.length > 0) {
+        const result = servicedata
+          .filter((e) => e.name.toLowerCase().startsWith(serviceName))
+          .slice(0, 10);
+        setSearchResult(result);
+      } else {
+        setSearchResult([]);
+      }
+    } else {
+      let filteredData = servicedata;
+      if (searchbytag.type !== "show") {
+        filteredData = filteredData.filter((e) => e.type === searchbytag.type);
+      }
+      if (searchbytag.status !== "show") {
+        filteredData = filteredData.filter((e) => e.status === searchbytag.status);
+      }
+      setFilteredTagsResult(filteredData.slice(0, 10));
     }
-    else{
-        if(searchbytag.type!=="show" && searchbytag.status!=="show"){
-            let result=servicedata
-            .filter((e)=>e.type==searchbytag.type)
-            let Data=result.filter((e)=>e.status==searchbytag.status)
-            .slice(0,10);
-            setFilteredTagsResult(Data)
-        }else{
-            setFilteredTagsResult([])
-        }
-    }
-  },[serviceName,searchbytag])
+  }, [serviceName, searchbytag, filterbycategory, servicedata]);
+
 
   const handleSearchByName = (e) => {
     const searchname = e.target.value.toLowerCase();
@@ -186,15 +184,19 @@ const handleServiceType=(e,type)=>{
                                     <span>{el.type}</span>
                                 </div>
                                 <div className={`${
-                                     el.status == "Private"
-                                     ? "text-green-700"
-                                     : el.status == "Public"
-                                     ? "text-amber-600"
-                                     : el.status == "Disable"
-                                     ? "text-red-600"
-                                     : el.status == "Draft"
-                                     ? "text-blue-500"
-                                     : ""
+                                     el.status == "Inactive"
+                                     ? "bg-slate-100 text-black"
+                                     : el.status == "Active"
+                                     ? "bg-green-100 text-green-700"
+                                     : el.status === "Private"
+                                     ? "bg-slate-100 text-green-700"
+                                     : el.status === "Public"
+                                     ? "bg-slate-100 text-amber-600"
+                                     : el.status === "Disable"
+                                     ? "bg-slate-100 text-red-600"
+                                     : el.status === "Draft"
+                                     ? "bg-slate-100 text-blue-500"
+                                     : "bg-slate-100 text-yellow-500"
                                 } ml-2 p-1 font-sans text-green text-xs rounded-md `}>
                                     <span>{el.status}</span>
                                 </div>

@@ -9,7 +9,7 @@ const SummaryBoxes = ({ data }) => {
   const newData = data.slice(-10);
   const count = newData.length;
   return (
-    <div className="h-[3%] grid gap-2 grid-cols-3 p-4">
+    <div className="h-[3%] grid gap-2 grid-cols-3 p-4 mb-10">
       <div className="p-4 bg-white rounded-lg shadow">
         {`All Waitlists ${waitlistdata}`}{" "}
       </div>

@@ -44,8 +44,8 @@ export default function Home() {
       <div className="mb-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Waitlist</h1>
       </div>
-      <SummaryBoxes data={data} />
-      <div className="flex flex-row justify-between">
+      <SummaryBoxes className="mt-4" data={data} />
+      <div className="mb-2 flex flex-row justify-between">
         <FilterModal
           data={data}
           setData={setData}
