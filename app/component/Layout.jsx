@@ -4,7 +4,6 @@ import Sidebar from './Sidebar';
 
 export default function Layout({ children }) {
   const [slideropen,setSliderOpen]=useState(true)
-  // const slideropens=slideropen.toString()
   return (
     <div className="w-[100%] flex flex-row">
       <Sidebar slideropen={slideropen} setSliderOpen={setSliderOpen}/>
