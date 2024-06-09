@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { LuFilter } from "react-icons/lu";
+import FilterServicesAndProducts from "./FilterServicesAndProducts";
 
 export default function FilterModal({ data, setData, waitlistData }) {
   console.log("waitlistDatea===============>", waitlistData);
@@ -13,6 +14,7 @@ export default function FilterModal({ data, setData, waitlistData }) {
   const [searchPeople, setSearchPeople] = useState("");
   const [searchPayer, setSearchPayer] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState([]);
+  const [filteredServices,setFilteredServices]=useState([])
 
   // filter with Secheduled Date----------------------------------
 
@@ -21,9 +23,9 @@ export default function FilterModal({ data, setData, waitlistData }) {
     setDateRange(selectedDateRange);
   };
 
-  const filterTableData = (dateRange) => {
+  const filterTableData = (dateRange,selectedPerson,filteredServices) => {
     const currentDate = new Date();
-    let filteredData = [];
+    let filteredData = waitlistData;
 
     switch (dateRange) {
       case "All time":
@@ -77,6 +79,15 @@ export default function FilterModal({ data, setData, waitlistData }) {
         selectedPerson.some((item) => item.id === data.id)
       );
     }
+    console.log("filteredServices-------->",filteredServices)
+    if (filteredServices.length > 0) {
+      // console.log("ghgfhg")  
+      const serviceIds = filteredServices.map(service => service.id);
+      console.log("serviceIds",serviceIds) 
+      filteredData = filteredData.filter(item => serviceIds.includes(parseInt(item.serviceId)));
+      console.log("filteredData11111",filteredData) 
+    }
+    console.log("filteredData====>",filteredData)
     setData(filteredData);
   };
   const filterByDateRange = (waitlistData, currentDate, days) => {
@@ -154,7 +165,7 @@ export default function FilterModal({ data, setData, waitlistData }) {
   // filter with services and products-------------------------
 
   const applyDataFilter = () => {
-    filterTableData(dateRange, selectedPerson);
+    filterTableData(dateRange, selectedPerson,filteredServices);
     setIsOpen(false);
   };
   const resetDefaultFilter = () => {
@@ -166,12 +177,13 @@ export default function FilterModal({ data, setData, waitlistData }) {
     setSearchPeople("");
     setSelectedPerson([]);
   };
-
+console.log("filteredServices",filteredServices)
   return (
     <>
-      <div className="px-3 h-[5%]">
-        <button className="p-2" onClick={() => setIsOpen(!isopen)}>
-          <LuFilter />
+      <div className="px-3 h-[1.5%]">
+        <button className="p-4 flex" onClick={() => setIsOpen(!isopen)}>
+          <LuFilter className="mr-2"/>
+          Filter
         </button>
         {isopen && (
           <div className="fixed inset-0 bg-opacity-30 bg-gray-900  flex justify-center items-center">
@@ -318,22 +330,7 @@ export default function FilterModal({ data, setData, waitlistData }) {
                     </div>
                   )}
                   {activeTab === "servicesAndProducts" && (
-                    <div className="filter-options flex flex-row items-center">
-                      <input
-                        type="radio"
-                        id="search-by-name"
-                        name="search-option"
-                        className="mx-2"
-                      />
-                      <label htmlFor="search-by-name">Search by name</label>
-                      <input
-                        type="radio"
-                        id="search-by-tags"
-                        name="search-option"
-                        className="mx-2"
-                      />
-                      <label htmlFor="search-by-tags">Search by tags</label>
-                    </div>
+                    <FilterServicesAndProducts onFilter={setFilteredServices}/>
                   )}
                 </div>
               </div>

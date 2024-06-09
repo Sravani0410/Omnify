@@ -73,7 +73,15 @@ const Table = ({ data }) => {
                           ? "bg-slate-100 text-black"
                           : el.status == "Active"
                           ? "bg-green-100 text-green-700"
-                          : "bg-blue-100 text-blue-700"
+                          :  el.status === "Private"
+                          ? "bg-slate-100 text-green-700"
+                          : el.status === "Public"
+                          ? "bg-slate-100 text-amber-600"
+                          : el.status === "Disable"
+                          ? "bg-slate-100 text-red-600"
+                          : el.status === "Draft"
+                          ? "bg-slate-100 text-blue-500"
+                          : "bg-slate-100 text-yellow-500"
                       } py-1 px-2 text-xs rounded-md`}
                     >
                       <GoDotFill />

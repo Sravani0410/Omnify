@@ -34,7 +34,7 @@ export default function Home() {
           Filter
         </button> */}
       </div>
-      {/* <SummaryBoxes/> */}
+      <SummaryBoxes/>
       <FilterModal
          data={data}
          setData={setData}
