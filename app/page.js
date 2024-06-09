@@ -8,6 +8,8 @@ import SummaryBoxes from "./component/SummaryBoxes";
 import FilterModal from "./component/FilterModal";
 import EditColumnModal from "./component/EditColumnModal";
 import Pagination from "./component/Pagination";
+import { GoDownload } from "react-icons/go";
+import { BsArrowRepeat } from "react-icons/bs";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -18,31 +20,34 @@ export default function Home() {
   ]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(
+        `https://backend-data-nine.vercel.app/data`
+      );
+      setData(res.data);
+      setWaitlistData(res.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          `https://backend-data-nine.vercel.app/data`
-        );
-        setData(res.data);
-        setWaitlistData(res.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
     fetchData();
   }, []);
 
   const handleApply=()=>{
     setEditShowModal(false)
   }
+  const handleRefresh=()=>{
+    fetchData()
+  }
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <Layout>
-      <div className="mb-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Waitlist</h1>
+      <div className="mb-2 flex justify-between items-center">
+        <h1 className="mb-2 text-2xl font-bold">Waitlist</h1>
       </div>
       <SummaryBoxes className="mt-4" data={data} />
       <div className="mb-2 flex flex-row justify-between">
@@ -52,10 +57,16 @@ export default function Home() {
           waitlistData={waitlistData}
         />
         <div className="flex flex-row justify-between">
+          <button className="p-4 rounded bg-gray-100 hover:bg-gray-200" onClick={handleRefresh}>
+          <BsArrowRepeat />
+          </button>
           <button
-          className="p-2 rounded bg-gray-100 hover:bg-gray-200" 
+          className="p-4 rounded bg-gray-100 hover:bg-gray-200" 
           onClick={() => setEditShowModal(true)}>
             <FiColumns />
+          </button>
+          <button className="p-4 rounded bg-gray-100 hover:bg-gray-200">
+          <GoDownload />
           </button>
         </div>
         {editshowmodal && (
@@ -66,7 +77,7 @@ export default function Home() {
           />
         )}
       </div>
-      <div className="h-[70%] mt-4">
+      <div className="h-[65%] mt-1">
         <Table data={currentData} selectedColumns={selectedColumns} />
       </div>
       <Pagination
