@@ -12,7 +12,7 @@ import { BiLoaderCircle } from "react-icons/bi";
 import { LuPanelRightClose } from "react-icons/lu";
 import { useEffect, useState } from "react";
 
-export default function Sidebar({ sliderOpen, setSliderOpen }) {
+export default function Sidebar({ slideropen, setSliderOpen }) {
   const [date,setDate]=useState({})
   useEffect(() => {
     function getCurrentDateTime() {
@@ -57,15 +57,15 @@ export default function Sidebar({ sliderOpen, setSliderOpen }) {
   
   return (
     <div className={`transition-all ${
-      sliderOpen ? "w-1/5" : "w-[8%]"
+      slideropen ? "w-1/5" : "w-[8%]"
     } bg-gray-100 h-full hidden p-5 border-3px border-black rounded-lg lg:block md:block lg:h-screen md:h-screen`}>
      {
-     sliderOpen? (
+     slideropen? (
      <div className="h-full bg-white shadow-md">
         <div className="p-4 border-b flex flex-row justify-between">
         <BiLoaderCircle size={30}/>
           <h3 className="text-xl font-bold">Front-Desk</h3>
-          <button className="p-2 flex" onClick={()=>setSliderOpen(!sliderOpen)}>
+          <button className="p-2 flex" onClick={()=>setSliderOpen(!slideropen)}>
             <LuPanelRightClose />
           </button>
         </div>
@@ -106,7 +106,7 @@ export default function Sidebar({ sliderOpen, setSliderOpen }) {
       ):(
         <div className="h-full bg-white shadow-md">
         <div className="p-6 border-b flex flex-row justify-between">
-          <button className="p-2 flex" onClick={()=>setSliderOpen(!sliderOpen)}>
+          <button className="p-2 flex" onClick={()=>setSliderOpen(!slideropen)}>
            <BiLoaderCircle size={30}/>
           </button>
         </div>

@@ -14,7 +14,7 @@ const FilterServicesAndProducts = ({ onFilter }) => {
       try {
         const res = await axios.get(`https://backend-data-nine.vercel.app/services`);
         setServiceData(res.data);
-        console.log("Fetched services data:", res.data); // Debugging log
+        // console.log("Fetched services data:", res.data);
       } catch (err) {
         console.error("Error while fetching services data:", err);
       }
@@ -29,7 +29,7 @@ const FilterServicesAndProducts = ({ onFilter }) => {
           .filter((e) => e.name.toLowerCase().startsWith(serviceName))
           .slice(0, 10);
         setSearchResult(result);
-        console.log("Filtered search results:", result); // Debugging log
+        // console.log("Filtered search results:", result); 
       } else {
         setSearchResult([]);
       }

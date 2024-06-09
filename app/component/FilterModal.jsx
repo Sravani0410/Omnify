@@ -5,7 +5,7 @@ import { LuFilter } from "react-icons/lu";
 import FilterServicesAndProducts from "./FilterServicesAndProducts";
 
 export default function FilterModal({ data, setData, waitlistData }) {
-  console.log("waitlistDatea===============>", waitlistData);
+  // console.log("waitlistDatea===============>", waitlistData);
   const [isopen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("scheduledDate");
   const [dateRange, setDateRange] = useState("All time");
@@ -79,15 +79,15 @@ export default function FilterModal({ data, setData, waitlistData }) {
         selectedPerson.some((item) => item.id === data.id)
       );
     }
-    console.log("filteredServices-------->",filteredServices)
+    // console.log("filteredServices-------->",filteredServices)
     if (filteredServices.length > 0) {
       // console.log("ghgfhg")  
       const serviceIds = filteredServices.map(service => service.id);
-      console.log("serviceIds",serviceIds) 
+      // console.log("serviceIds",serviceIds) 
       filteredData = filteredData.filter(item => serviceIds.includes(parseInt(item.serviceId)));
-      console.log("filteredData11111",filteredData) 
+      // console.log("filteredData11111",filteredData) 
     }
-    console.log("filteredData====>",filteredData)
+    // console.log("filteredData====>",filteredData)
     setData(filteredData);
   };
   const filterByDateRange = (waitlistData, currentDate, days) => {
@@ -177,7 +177,7 @@ export default function FilterModal({ data, setData, waitlistData }) {
     setSearchPeople("");
     setSelectedPerson([]);
   };
-console.log("filteredServices",filteredServices)
+// console.log("filteredServices",filteredServices)
   return (
     <>
       <div className="px-3 h-[1.5%]">

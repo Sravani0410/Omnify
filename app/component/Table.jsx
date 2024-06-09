@@ -5,7 +5,7 @@ import { FaRegUser } from "react-icons/fa6";
 import { LuHash } from "react-icons/lu";
 
 const Table = ({ data }) => {
-  console.log("data=========>", data);
+  // console.log("data=========>", data);
   return (
     <div className="overflow-scroll px-0 scroll-smooth">
       <table className="mt-4 w-full min-w-max table-auto text-left">
@@ -50,7 +50,7 @@ const Table = ({ data }) => {
         </thead>
         <tbody>
           {data?.map((el) => {
-            console.log(el);
+            // console.log(el);
             return (
               <tr key={el.id}>
                 <td className="p-4 border-b border-blue-gray-50">
