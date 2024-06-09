@@ -1,11 +1,16 @@
+"use client"
+import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 
 export default function Layout({ children }) {
+  const [sliderOpen,setSliderOpen]=useState(true)
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <Sidebar />
+    <div className="w-[100%] flex flex-row">
+      <Sidebar sliderOpen={sliderOpen} setSliderOpen={setSliderOpen}/>
       <main className="flex-1 p-6">
-        {children}
+        {React.Children.map(children, (child) =>
+          React.cloneElement(child, { sliderOpen })
+        )}
       </main>
     </div>
   );

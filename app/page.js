@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from 'react';
+import { FiColumns } from "react-icons/fi";
 import Layout from './component/Layout';
 import Table from './component/Table';
 import axios from 'axios';
@@ -35,11 +36,15 @@ export default function Home() {
         </button> */}
       </div>
       <SummaryBoxes/>
+      <div className='flex flex-row justify-between'>
       <FilterModal
          data={data}
          setData={setData}
          waitlistData={waitlistData}
       />
+      <FiColumns />
+      </div>
+      
       <div className="h-[70%]">
         <Table data={data} />
       </div>
