@@ -308,8 +308,8 @@ export default function FilterModal({ data, setData, waitlistData }) {
                       {searchPeople.length > 0 && (
                         <div>
                           <h4>
-                            Showing {searchPayer.length} results matching "
-                            {searchPeople}":
+                            Showing {searchPayer.length} results matching &quot;
+                            {searchPeople} &quot;:
                           </h4>
                           {searchPayer.map((p) => (
                             <div key={p.id} className="m-0.5 flex flex-row">

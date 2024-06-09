@@ -111,7 +111,7 @@ const handleServiceType=(e,type)=>{
           {searchResult.length > 0 && (
             <div>
               <h4>
-                Showing {searchResult.length} results matching "{serviceName}":
+                Showing {searchResult.length} results matching &quot; {serviceName} &quot;:
               </h4>
               {searchResult.map((el) => (
                 <div className="flex flex-row justify-between m-0.5" key={el.id}>
