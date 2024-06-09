@@ -7,6 +7,7 @@ import axios from "axios";
 import SummaryBoxes from "./component/SummaryBoxes";
 import FilterModal from "./component/FilterModal";
 import EditColumnModal from "./component/EditColumnModal";
+import Pagination from "./component/Pagination";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -15,6 +16,8 @@ export default function Home() {
   const [selectedColumns, setSelectedColumns] = useState([
     'created_on', 'payer', 'status', 'email', 'payer_phone', 'services', 'scheduled'
   ]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,6 +36,9 @@ export default function Home() {
   const handleApply=()=>{
     setEditShowModal(false)
   }
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <Layout>
       <div className="mb-4 flex justify-between items-center">
@@ -61,8 +67,14 @@ export default function Home() {
         )}
       </div>
       <div className="h-[70%] mt-4">
-        <Table data={data} selectedColumns={selectedColumns} />
+        <Table data={currentData} selectedColumns={selectedColumns} />
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={data.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </Layout>
   );
 }
