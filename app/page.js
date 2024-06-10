@@ -14,8 +14,8 @@ import { BsArrowRepeat } from "react-icons/bs";
 export default function Home() {
   const [data, setData] = useState([]);
   const [waitlistData, setWaitlistData] = useState([]);
-  const [editshowmodal, setEditShowModal] = useState();
-  const [filteredData, setFilteredData] = useState([]);
+  const [editshowmodal, setEditShowModal] = useState(false);
+  // const [filteredData, setFilteredData] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState([
     'created_on', 'payer', 'status', 'email', 'payer_phone', 'services', 'scheduled'
   ]);
@@ -28,7 +28,7 @@ export default function Home() {
       );
       setData(res.data);
       setWaitlistData(res.data);
-      setFilteredData(res.data)
+      // setFilteredData(res.data)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -43,6 +43,10 @@ export default function Home() {
   const handleRefresh=()=>{
     fetchData()
   }
+  const handleFilter = (filteredData) => {
+    setData(filteredData);
+    setCurrentPage(1)
+  };
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
@@ -57,10 +61,9 @@ export default function Home() {
       <SummaryBoxes data={data} />
       <div className="mb-2 flex flex-row justify-between">
         <FilterModal
-          data={data}
-          setData={setData}
+          data={waitlistData  }
+          setData={handleFilter}
           waitlistData={waitlistData}
-          setFilteredData={setFilteredData} 
         />
         <div className="flex flex-row justify-between">
           <button className="ml-2 p-2 bg-white-600 text-black rounded-lg flex items-center" onClick={handleRefresh}>
