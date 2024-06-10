@@ -321,8 +321,10 @@ export default function FilterModal({ data, setData, waitlistData }) {
                                 />
                                 {p.payer}
                               </label>
-                              <div className="flex flex-row font-sans ml-2 bg-slate-100 text-black p-1 text-xs rounded-md"></div>
+                              <div className="flex flex-row font-sans ml-2 bg-slate-100 text-black p-1 text-xs rounded-md">
                               <span>payer</span>
+                              </div>
+                              
                             </div>
                           ))}
                         </div>
