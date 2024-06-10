@@ -15,6 +15,7 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [waitlistData, setWaitlistData] = useState([]);
   const [editshowmodal, setEditShowModal] = useState();
+  const [filteredData, setFilteredData] = useState([]);
   const [selectedColumns, setSelectedColumns] = useState([
     'created_on', 'payer', 'status', 'email', 'payer_phone', 'services', 'scheduled'
   ]);
@@ -27,6 +28,7 @@ export default function Home() {
       );
       setData(res.data);
       setWaitlistData(res.data);
+      setFilteredData(res.data)
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -46,27 +48,31 @@ export default function Home() {
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <Layout>
-      <div className="mb-2 flex justify-between items-center">
-        <h1 className="mb-2 text-2xl font-bold">Waitlist</h1>
+      <div className="flex flex-col h-full">
+      <div className="flex flex-col lg:flex-row md:flex-row sm:flex-col justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold mb-4 lg:mb-0 md:mb-0">Waitlist</h2>
+        
       </div>
-      <SummaryBoxes className="mt-4" data={data} />
+          
+      <SummaryBoxes data={data} />
       <div className="mb-2 flex flex-row justify-between">
         <FilterModal
           data={data}
           setData={setData}
           waitlistData={waitlistData}
+          setFilteredData={setFilteredData} 
         />
         <div className="flex flex-row justify-between">
-          <button className="p-4 rounded bg-gray-100 hover:bg-gray-200" onClick={handleRefresh}>
-          <BsArrowRepeat />
+          <button className="ml-2 p-2 bg-white-600 text-black rounded-lg flex items-center" onClick={handleRefresh}>
+          <BsArrowRepeat className="mr-2"/>
           </button>
           <button
-          className="p-4 rounded bg-gray-100 hover:bg-gray-200" 
+          className="ml-2 p-2 bg-white-600 text-black rounded-lg flex items-center" 
           onClick={() => setEditShowModal(true)}>
-            <FiColumns />
+            <FiColumns className="mr-2"/>
           </button>
-          <button className="p-4 rounded bg-gray-100 hover:bg-gray-200">
-          <GoDownload />
+          <button className="ml-2 p-2 bg-white-600 text-black rounded-lg flex items-center">
+          <GoDownload className="mr-2"/>
           </button>
         </div>
         {editshowmodal && (
@@ -86,6 +92,8 @@ export default function Home() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
+      </div>
+     
     </Layout>
   );
 }

@@ -79,15 +79,15 @@ export default function FilterModal({ data, setData, waitlistData }) {
         selectedPerson.some((item) => item.id === data.id)
       );
     }
-    // console.log("filteredServices-------->",filteredServices)
+    console.log("filteredServices-------->",filteredServices)
     if (filteredServices.length > 0) {
-      // console.log("ghgfhg")  
+      console.log("ghgfhg")  
       const serviceIds = filteredServices.map(service => service.id);
-      // console.log("serviceIds",serviceIds) 
+      console.log("serviceIds",serviceIds) 
       filteredData = filteredData.filter(item => serviceIds.includes(parseInt(item.serviceId)));
-      // console.log("filteredData11111",filteredData) 
+      console.log("filteredData11111",filteredData) 
     }
-    // console.log("filteredData====>",filteredData)
+    console.log("filteredData====>",filteredData)
     setData(filteredData);
   };
   const filterByDateRange = (waitlistData, currentDate, days) => {
@@ -180,8 +180,8 @@ export default function FilterModal({ data, setData, waitlistData }) {
 // console.log("filteredServices",filteredServices)
   return (
     <>
-      <div className="px-2 mt-2 h-[1.5%] shadow-md bg-gray-200 rounded-md">
-        <button className="p-2 flex" onClick={() => setIsOpen(!isopen)}>
+      <div className="px-2 mt-2 h-[1.5%] shadow-md bg-gray-200 rounded-lg">
+        <button className="p-2 flex shadow-md bg-gray-200" onClick={() => setIsOpen(!isopen)}>
           <LuFilter className="mr-2"/>
           Filter
         </button>
