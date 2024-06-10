@@ -186,10 +186,10 @@ export default function FilterModal({ data, setData, waitlistData }) {
           Filter
         </button>
         {isopen && (
-          <div className="fixed inset-0 bg-opacity-20 bg-gray-900  flex justify-center items-center">
+          <div className="fixed inset-0 bg-opacity-20 bg-gray-900  flex justify-center items-center p-4 sm:p-6 lg:p-8">
             <div className="w-3/4 p-6 bg-white rounded-lg shadow-lg max-w-4xl">
-              <div className="flex">
-                <div className="w-1/4 pr-4 border-r">
+              <div className="flex flex-col md:flex-row">
+                <div className="w-full md:w-1/4 pr-4 border-b md:border-b-0 md:border-r">
                   <button
                     onClick={() => setActiveTab("scheduledDate")}
                     className={`block w-full text-left px-4 py-2 ${
@@ -215,7 +215,7 @@ export default function FilterModal({ data, setData, waitlistData }) {
                     Services / Products
                   </button>
                 </div>
-                <div className="w-3/4 pl-4">
+                <div className="w-full md:w-3/4 pl-4">
                   {activeTab === "scheduledDate" && (
                     <div>
                       <label
