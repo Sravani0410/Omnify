@@ -52,29 +52,28 @@ export default function Home() {
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
   return (
     <Layout>
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full overflow-y-auto">
       <div className="flex flex-col lg:flex-row md:flex-row sm:flex-col justify-between items-center mb-4">
         <h2 className="text-2xl font-bold mb-4 lg:mb-0 md:mb-0">Waitlist</h2>
         
-      </div>
-          
+      </div>          
       <SummaryBoxes data={data} />
-      <div className="mb-2 flex flex-row justify-between">
+      <div className="mb-2 flex flex-col sm:flex-row justify-between items-center sm:items-start">
         <FilterModal
           data={waitlistData  }
           setData={handleFilter}
           waitlistData={waitlistData}
         />
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between mt-2 sm:mt-0 space-x-2">
           <button className="ml-2 p-2 bg-white-600 text-black rounded-lg flex items-center" onClick={handleRefresh}>
           <BsArrowRepeat className="mr-2"/>
           </button>
           <button
-          className="ml-2 p-2 bg-white-600 text-black rounded-lg flex items-center" 
+          className="p-2 bg-white-600 text-black rounded-lg flex items-center" 
           onClick={() => setEditShowModal(true)}>
             <FiColumns className="mr-2"/>
           </button>
-          <button className="ml-2 p-2 bg-white-600 text-black rounded-lg flex items-center">
+          <button className="p-2 bg-white-600 text-black rounded-lg flex items-center">
           <GoDownload className="mr-2"/>
           </button>
         </div>
@@ -89,12 +88,15 @@ export default function Home() {
       <div className="h-[65%] mt-1">
         <Table data={currentData} selectedColumns={selectedColumns} />
       </div>
+      <div className="mt-auto flex-none w-full flex justify-between">
+
       <Pagination
         itemsPerPage={itemsPerPage}
         totalItems={data.length}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
+      </div>
       </div>
      
     </Layout>
