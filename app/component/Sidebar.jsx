@@ -115,12 +115,12 @@ export default function Sidebar({ slideropen, setSliderOpen }) {
       </div>
       ):(
         <div className="h-full flex flex-col bg-white shadow-md">
-        <div className="p-6 border-b flex justify-between">
-          <button className="p-2 flex" onClick={()=>setSliderOpen(!slideropen)}>
+        <div className="border-b flex justify-between">
+          <button className="p-2" onClick={()=>setSliderOpen(!slideropen)}>
            <BiLoaderCircle size={30}/>
           </button>
         </div>
-        <div className="p-4">
+        <div className="p-2">
           <nav>
             <ul>
               <li className="mb-2 flex justify-center items-center">
