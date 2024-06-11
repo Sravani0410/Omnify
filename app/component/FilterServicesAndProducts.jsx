@@ -53,22 +53,18 @@ const FilterServicesAndProducts = ({ onFilter }) => {
         setSearchResult([]);
       }
     } else {
-      // let filteredData = servicedata;
-      if (searchbytag.type !== "show" || searchbytag.status !== "show") {
-        let filteredType = servicedata.filter((e) => e.type == searchbytag.type);
-        let filteredtags=filteredType.filter((el)=>el.status==searchbytag.status);
-        setFilteredTagsResult(filteredtags);
-        
+      let filteredData = servicedata;
+      if (searchbytag.type !== "show") {
+        filteredData = filteredData.filter(
+          (e) => e.status === searchbytag.status
+        );
       }
-      else{
-        setFilteredTagsResult([])
+      if (searchbytag.status !== "show") {
+        filteredData = filteredData.filter(
+          (e) => e.status === searchbytag.status
+        );
       }
-      // if (searchbytag.status !== "show") {
-      //   filteredData = filteredData.filter(
-      //     (e) => e.status === searchbytag.status
-      //   );
-      // }
-      // setFilteredTagsResult(filteredData.slice(0, 10));
+      setFilteredTagsResult(filteredData.slice(0, 10));
     }
   }, [serviceName, searchbytag, filterbycategory, servicedata]);
 
@@ -84,7 +80,7 @@ const FilterServicesAndProducts = ({ onFilter }) => {
       // ...searchbytag,
       [type]: e.target.value,
     };
-    setSearchByTag({...searchbytag, ...updatedServiceSelction});
+    setSearchByTag({ ...searchbytag, ...updatedServiceSelction });
   };
   return (
     <div>
@@ -194,7 +190,7 @@ const FilterServicesAndProducts = ({ onFilter }) => {
               className="flex flex-row justify-between m-0.5">
                 <div className="flex flex-row justify-end">
                 <label>
-                  <input type="checkout" />
+                  <input type="checkbox" />
                   {el.name}
                 </label>
                   <div className="flex flex-row justify-end">
